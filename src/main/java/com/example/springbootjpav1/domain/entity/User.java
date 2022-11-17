@@ -1,12 +1,21 @@
 package com.example.springbootjpav1.domain.entity;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
+
+import javax.persistence.*;
 
 @Builder
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Entity
+@Table(name = "users")
+@Getter
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     private String username;
+    @Column
     private String password;
 }

@@ -1,13 +1,11 @@
 package com.example.springbootjpav1.controller;
 
+import com.example.springbootjpav1.domain.dto.UserRequest;
 import com.example.springbootjpav1.domain.dto.UserResponse;
 import com.example.springbootjpav1.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -22,7 +20,12 @@ public class UserRestController {
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getOneByUserId(@PathVariable Long id) {
         log.info("getOneByUserId : {}", id);
-        return ResponseEntity.ok(userService.getOneById(id));
+        return ResponseEntity.ok().body(userService.getOneById(id));
     }
 
+    @PostMapping("/new")
+    public ResponseEntity<UserResponse> addUser(@RequestBody UserRequest userRequest) {
+        log.info("addUser : {}", userRequest);
+        return ResponseEntity.ok().body(userService.addUser(userRequest));
+    }
 }
