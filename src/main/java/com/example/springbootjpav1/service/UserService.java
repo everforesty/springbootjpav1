@@ -27,8 +27,8 @@ public class UserService {
     }
 
     public UserResponse addUser(UserRequest userRequest) {
-        // user req is already in repository, return message NO
         // user req is doesn't exist in repository, return message YES
+        // user req is already in repository, return message NO
         if (userRepository.findByUsername(userRequest.getUsername()).isEmpty()) {
             User savedUser = userRepository.save(userRequest.toEntity());
             return new UserResponse(savedUser.getId(), savedUser.getUsername(), "회원 등록 성공하였습니다");
